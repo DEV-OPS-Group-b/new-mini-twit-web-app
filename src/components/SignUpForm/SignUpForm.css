@@ -1,0 +1,49 @@
+.formBox {
+    background: rgba(245, 245, 245, 0.5);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-top: 100%;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+  
+.titleText {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 25px;
+}
+  
+.descriptionText {
+    display: flex;
+    font-size: 13px;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
+  
+.link {
+    text-decoration: none;
+    color: #439cb8;
+    font-weight: bold;
+    background: transparent;
+    border: none !important;
+    cursor: pointer;
+}
+  
+.textField {
+    width: 100%;
+}
+  
+.errorMsg {
+    color: darkred;
+    font-size: 10px;
+}
+  
+.button {
+    margin-top: 40px;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

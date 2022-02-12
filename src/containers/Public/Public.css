@@ -1,0 +1,59 @@
+/* .app {
+    height: 100vh; 
+} */
+
+.header {
+    height: 5%;
+    background-color: #00091a;
+    text-align: center;
+    position: relative;
+    color: whitesmoke;
+}
+
+.header p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* .body {
+    height: 90%;
+} */
+
+.footer {
+    height: 5%;
+    background-color: #00091a;
+    text-align: center;
+    position: relative;
+    color: whitesmoke;
+}
+
+.footer p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.grid {
+    height: 120%;
+}
+
+.gridBody {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.feedDiv {
+    margin: 20px;
+}
+
+.tweetsDiv {
+    margin-top: 50px;
+}
+
+.line {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}

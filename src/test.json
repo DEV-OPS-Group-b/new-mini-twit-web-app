@@ -1,0 +1,17 @@
+{
+    "twits": [
+      { "id": 1, "date": "12/02/2022 at 12:00", "text": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a .." },
+      { "id": 2, "date": "12/02/2022 at 15:00", "text": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a .." },
+      { "id": 3, "date": "12/02/2022 at 20:00", "text": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a .." },
+      { "id": 4, "date": "13/02/2022 at 12:00", "text": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a .." },
+      { "id": 5, "date": "13/02/2022 at 12:00", "text": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a .." },
+      { "id": 6, "date": "13/02/2022 at 12:00", "text": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a .." }
+    ],
+    "allTweets": [
+      { "id": 1, "userId": 1, "username": "Jerry", "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrE3EVHKt8VY1RbXgK-KI6V6n4BMbSlPq1lA&usqp=CAU", "date": "12/02/2022 at 12:00", "text": "Es un hecho establecido desde hace mucho tiempo que un lector se distraerá con el contenido legible de una página cuando mire su diseño. El punto de usar Lorem Ipsum es que tiene un... "},
+      { "id": 2, "userId": 1, "username": "Jerry", "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrE3EVHKt8VY1RbXgK-KI6V6n4BMbSlPq1lA&usqp=CAU", "date": "12/02/2022 at 18:00", "text": "Es un hecho establecido desde hace mucho tiempo que un lector se distraerá con el contenido legible de una página cuando mire su diseño. El punto de usar Lorem Ipsum es que tiene un... "},
+      { "id": 3, "userId": 2, "username": "Sonic", "userAvatar": "https://s.yimg.com/os/creatr-uploaded-images/2021-04/4582ea80-a2b5-11eb-9f5b-a9691eb2f128", "date": "13/02/2022 at 08:30", "text": "C'est un fait établi depuis longtemps qu'un lecteur sera distrait par le contenu lisible d'une page lorsqu'il regarde sa mise en page. L'intérêt d'utiliser Lorem Ipsum est qu'il a un .. "},
+      { "id": 4, "userId": 3, "username": "Remi", "userAvatar": "https://static01.nyt.com/images/2020/11/22/multimedia/00xp-ratatouille/00xp-ratatouille-articleLarge.jpg?quality=75&auto=webp&disable=upscale", "date": "13/02/2022 at 15:25", "text": "È un fatto consolidato da tempo che un lettore sarà distratto dal contenuto leggibile di una pagina quando osserva il suo layout. Il punto di usare Lorem Ipsum è che ha un ..  "},
+      { "id": 5, "userId": 4, "username": "Sid", "userAvatar": "https://wallpapercave.com/wp/wp2719536.jpg", "date": "14/02/2022 at 22:22", "text": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a .."}
+    ]
+}

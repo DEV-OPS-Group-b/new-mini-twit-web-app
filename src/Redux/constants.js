@@ -1,0 +1,12 @@
+export const GET_USER = "GET_USER";
+export const SET_USER = "SET_USER";
+
+export const GET_ALL_TWEETS = "GET_ALL_TWEETS";
+export const SET_ALL_TWEETS = "SET_ALL_TWEETS";
+
+export const GET_USER_TWEETS = "GET_USER_TWEETS";
+export const SET_USER_TWEETS = "SET_USER_TWEETS";
+
+export const CREATE_TWEET = "CREATE_TWEET";
+export const CREATE_TWEET_SUCCESS = "CREATE_TWEET_SUCCESS";
+export const CREATE_TWEET_ERROR = "CREATE_TWEET_ERROR";

@@ -1,0 +1,39 @@
+.mainBody {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+img {
+    border-radius: 5px;
+    width: 70px;
+    height: 70px;
+}
+
+.imgDiv {
+    float: left;
+}
+
+.twitContent {
+    float: left;
+    margin-left: 10px;
+    width: 85%;
+}
+
+.twitInfo {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.username {
+    float: left;
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.date {
+    float: right;
+    margin-top: 2px;
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 13px;
+}

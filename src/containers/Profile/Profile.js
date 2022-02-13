@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Grid from "@material-ui/core/Grid";
-import Button from '@mui/material/Button';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from "@material-ui/core/styles";
 
 import { getUserTweets } from '../../Redux/actions';
 import { userTweetsSelector } from "../../Redux/selectors";
 
 import TwitTile from "../../components/TwitTile/TwitTile";
+import AddTweetDialog from "../../components/AddTweetDialog/AddTweetDialog";
 import './Profile.css';
 
 const useStyles = makeStyles(() => ({
@@ -19,18 +20,19 @@ const useStyles = makeStyles(() => ({
         background: "rgba(67,156,184, 0.5)",
         },
         color: "white",
-        borderRadius: "15px",
+        borderRadius: "45px",
         width: "150px",
     },
 }));
 
 function Profile(props) {
-
     const {
         // getUserAction,
         getUserTweetsAction,
         userTweets,
     } = props;
+
+    const [addTweetDialog, setAddTweetDialogOpen] = useState(false);
 
     useEffect(() => {
         let userId = 1;
@@ -51,7 +53,16 @@ function Profile(props) {
                         <div className="feedDiv">
                             <div className="innerFeedDiv">
                                 <div className="feedTitle">MY FEED</div>
-                                <Button variant="contained" className={classes.primaryButton}>Add tweet</Button>
+                                <Button 
+                                    variant="contained" 
+                                    className={classes.primaryButton}
+                                    onClick={() => setAddTweetDialogOpen(true)}>
+                                        Add tweet
+                                </Button>
+                                <AddTweetDialog
+                                    open={addTweetDialog}
+                                    setAddTweetDialogOpen={setAddTweetDialogOpen}
+                                />
                             </div>
                             <hr className="line"/>
                             <div className="tweetsDiv">

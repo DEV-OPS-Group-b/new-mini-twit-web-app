@@ -10,7 +10,6 @@ import { Provider } from "react-redux";
 import './index.css';
 
 import store from "./store";
-// import App from './App';
 import SignUp from './containers/SignUp/SignUp'
 import Login from './containers/Login/Login'
 import Public from './containers/Public/Public'

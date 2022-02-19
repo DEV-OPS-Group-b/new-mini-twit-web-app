@@ -1,6 +1,7 @@
 .mainBody {
     margin-top: 10px;
     display: inline-block;
+    width: 100%;
 }
 
 img {
@@ -16,7 +17,7 @@ img {
 .twitContent {
     float: left;
     margin-left: 10px;
-    width: 85%;
+    width: 80%;
 }
 
 .twitInfo {

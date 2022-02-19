@@ -1,6 +1,32 @@
+/**
+ * User
+ */
 export const GET_USER = "GET_USER";
 export const SET_USER = "SET_USER";
 
+export const CREATE_USER = "CREATE_USER";
+export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
+export const CREATE_USER_ERROR = "CREATE_USER_ERROR";
+
+export const LOGIN_USER = "LOGIN_USER";
+export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";
+export const LOGIN_USER_ERROR = "LOGIN_USER_ERROR";
+
+export const FOLLOW_USER = "FOLLOW_USER";
+export const FOLLOW_USER_SUCCESS = "FOLLOW_USER_SUCCESS";
+export const FOLLOW_USER_ERROR = "FOLLOW_USER_ERROR";
+
+export const UNFOLLOW_USER = "UNFOLLOW_USER";
+export const UNFOLLOW_USER_SUCCESS = "UNFOLLOW_USER_SUCCESS";
+export const UNFOLLOW_USER_ERROR = "UNFOLLOW_USER_ERROR";
+
+export const GET_IS_USER_FOLLOWING = "GET_IS_USER_FOLLOWING";
+export const SET_IS_USER_FOLLOWING = "SET_IS_USER_FOLLOWING";
+
+
+/**
+ * Tweet
+ */
 export const GET_ALL_TWEETS = "GET_ALL_TWEETS";
 export const SET_ALL_TWEETS = "SET_ALL_TWEETS";
 
@@ -10,3 +36,13 @@ export const SET_USER_TWEETS = "SET_USER_TWEETS";
 export const CREATE_TWEET = "CREATE_TWEET";
 export const CREATE_TWEET_SUCCESS = "CREATE_TWEET_SUCCESS";
 export const CREATE_TWEET_ERROR = "CREATE_TWEET_ERROR";
+
+export const UPDATE_TWEET_FLAG = "UPDATE_TWEET_FLAG";
+export const UPDATE_TWEET_FLAG_SUCCESS = "UPDATE_TWEET_FLAG_SUCCESS";
+export const UPDATE_TWEET_FLAG_ERROR = "UPDATE_TWEET_FLAG_ERROR";
+
+
+/**
+ * Reset Response success/failure
+ */
+export const RESET_TYPE = "RESET_TYPE";

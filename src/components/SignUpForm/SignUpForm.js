@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { compose, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import {
-    Link,
-  } from "react-router-dom";
+  Link,
+  useNavigate 
+} from "react-router-dom";
+
+import { createUser, resetTypeValue } from "../../Redux/actions";
+import { requestResponseSelector } from "../../Redux/selectors";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -21,8 +27,21 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function SignUpForm(props) {
+function SignUpForm(props) {
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  const { createUserAction, requestResponse, resetTypeValueAction } = props;
+
+  useEffect(() => {
+    if (requestResponse === true) {
+      navigate("/login");
+      resetTypeValueAction();
+    } 
+    else if (requestResponse === false) {
+      setResponseMessage("The username is already taken!")
+    }
+  }, [requestResponse]);  
 
   // Set state for Redux
   const [username, setUserName] = useState();
@@ -35,12 +54,14 @@ export default function SignUpForm(props) {
   const [emailErrorMsg, setEmailErrorMsg] = useState("");
   const [passwordErrorMsg, setPasswordErrorMsg] = useState("");
   const [confirmPasswordErrorMsg, setConfirmPasswordErrorMsg] = useState("");
+  const [responseMessage, setResponseMessage] = useState("");
 
 
   // Methods to validate Input Fields for Username, Email, Password and Confirmation Password
   const validateUsername = (username) => {
     const validUsername = new RegExp("^(?:.*[A-Za-z0-9])$");
     const isValid = validUsername.test(username);
+    setResponseMessage("");
     if (!isValid) {
       setUsernameErrorMsg("The username can only contain letters and numbers");
     } else if (username.length < 3 || username.length > 30) {
@@ -92,26 +113,9 @@ export default function SignUpForm(props) {
     }
   };
 
-
-  // Sign up function
-  async function signupUser(userData) {
-    return fetch("https://localhost:5001/createUser", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    }).then((data) => data.json());
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signupUser({
-      username,
-      email,
-      password,
-    });
+    createUserAction(username, email, password);
   };
 
   return (
@@ -160,7 +164,7 @@ export default function SignUpForm(props) {
               />
               <div className="errorMsg">{confirmPasswordErrorMsg}</div>
           </div>
-          {/* <div className="errorMsg">{responseMessage}</div> */}
+          <div className="errorMsg">{responseMessage}</div>
           <div className="button">
             <Button
               variant="contained"
@@ -174,3 +178,16 @@ export default function SignUpForm(props) {
       </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  createUserAction: createUser,
+  resetTypeValueAction: resetTypeValue,
+}, dispatch);
+
+const mapStateToProps = (state) => ({
+  requestResponse: requestResponseSelector(state) ? requestResponseSelector(state) : '',
+});
+
+const withRedux = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(withRedux(SignUpForm));

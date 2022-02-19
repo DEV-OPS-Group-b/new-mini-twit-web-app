@@ -21,18 +21,42 @@ export const userSelector = createSelector(
 *  Get All tweets selector
 */
 export const allTweetsSelector = createSelector(
-    selectUserDomain,
-    (substate) => {
-      return get(substate, 'allTweets');
-    }
+  selectUserDomain,
+  (substate) => {
+    return get(substate, 'allTweets');
+  }
 );
 
 /**
 *  Get User tweets selector
 */
 export const userTweetsSelector = createSelector(
-    selectUserDomain,
-    (substate) => {
-      return get(substate, 'userTweets');
+  selectUserDomain,
+  (substate) => {
+    return get(substate, 'userTweets');
+  }
+);
+
+/**
+*  Get User tweets selector
+*/
+export const isUserFollowingSelector = createSelector(
+  selectUserDomain,
+  (substate) => {
+    return get(substate, 'isFollowing');
+  }
+);
+
+/**
+ * SUCCESS / FAILURE after CUD operation
+ */
+export const requestResponseSelector = createSelector(
+  selectUserDomain,
+  (substate) => {
+    const type = get(substate, 'type');
+    if (type?.includes("SUCCESS")) {
+      return true;
     }
+    return false;
+  }
 );

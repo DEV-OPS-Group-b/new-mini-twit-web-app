@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { compose, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import {
     Link,
+    useNavigate 
   } from "react-router-dom";
+
+import { loginUser, resetTypeValue } from "../../Redux/actions";
+import { requestResponseSelector } from "../../Redux/selectors";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -21,41 +27,30 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-// Login functionality
-async function loginUser(credentials) {
-  // return fetch("https://localhost:5001/users/authenticate", {
-  return fetch("https://localhost:5001/login/{username}/{password}", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  }).then((data) => data.json());
-}
-
-export default function LoginForm(props) {
+function LoginForm(props) {
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  const { loginUserAction, requestResponse, resetTypeValueAction } = props;
 
   const [login, setLogin] = useState();
   const [password, setPassword] = useState();
   const [responseMsg, setResponseMsg] = useState(""); 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (requestResponse === true) {
+      navigate("/profile/" + login);
+      resetTypeValueAction();
+      setResponseMsg("");
+    } else if (requestResponse === false) {
+      setResponseMsg("Invalid credentials!");
+    }
+  }, [requestResponse]);  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = await loginUser({
-      login,
-      password,
-    });
-    // const isSuccessful = await setToken(token);
-    const isSuccessful = true;
-    if (!isSuccessful) {
-      setResponseMsg("Not a valid username/email and password combination!");
-    } else {
-      setIsLoggedIn(true);
-    }
-  };
+    loginUserAction(login, password)
+  };  
 
   return (
       <div className="formBox">
@@ -98,3 +93,16 @@ export default function LoginForm(props) {
       </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  loginUserAction: loginUser,
+  resetTypeValueAction: resetTypeValue,
+}, dispatch);
+
+const mapStateToProps = (state) => ({
+  requestResponse: requestResponseSelector(state) ? requestResponseSelector(state) : '',
+});
+
+const withRedux = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(withRedux(LoginForm));

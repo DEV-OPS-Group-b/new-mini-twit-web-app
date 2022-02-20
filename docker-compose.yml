@@ -1,0 +1,32 @@
+version: "2"
+
+services:
+  app:
+    container_name: mini-twit-itu-web-api
+    image: mini-twit-itu-web-api
+    build:
+      context: .
+      target: development
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 3000:3000
+  spring:
+    container_name: spring-backend
+    image: spring-backend
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    networks:
+      - isolated-network
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
+networks:
+  isolated-network:
+    driver: bridge
+

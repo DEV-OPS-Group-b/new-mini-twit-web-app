@@ -3,7 +3,7 @@ import axios from "axios";
 export function requestGetAllTweets() {
   return axios.request({
     method: "get",
-    url: "http://localhost:8080/devops/tweet/get-all-tweets",
+    url: "http://localhost:8080/devops/tweet/get-all-tweets/0/0",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

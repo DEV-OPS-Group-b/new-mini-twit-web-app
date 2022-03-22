@@ -22,6 +22,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        
+      # install applicaion dependencies
+      - name: Install dependencies
+        run: |
+          npm install
+          
+      # build the app
+      - name: build
+        run: |
+          npm run build
 
       # Login against a Docker registry
       # https://github.com/docker/login-action

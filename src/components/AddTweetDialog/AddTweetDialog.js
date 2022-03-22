@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { compose, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import Dialog from '@material-ui/core/Dialog';
 import TextField from '@mui/material/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from "@material-ui/core/styles";
+
+import { createTweet } from "../../Redux/actions";
 
 import './AddTweetDialog.css';
 
@@ -29,8 +33,8 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function AddTweetDialog(props) {
-    const { open, setAddTweetDialogOpen } = props;
+function AddTweetDialog(props) {
+    const { open, setAddTweetDialogOpen, createTweetAction, username } = props;
     const classes = useStyles();
 
     const [tweetText, setTweetText] = useState({
@@ -42,6 +46,12 @@ export default function AddTweetDialog(props) {
     };
 
     const cancelAddTweet = () => {
+        setAddTweetDialogOpen(false);
+        setTweetText("");
+    }
+
+    const handleCreateTweet = () => {
+        createTweetAction(username, tweetText.text);
         setAddTweetDialogOpen(false);
         setTweetText("");
     }
@@ -69,9 +79,22 @@ export default function AddTweetDialog(props) {
                         onClick={() => cancelAddTweet()}>
                         Cancel
                     </Button>
-                    <Button className={classes.primaryButton} variant="contained">Share</Button>  
+                    <Button 
+                        className={classes.primaryButton} 
+                        variant="contained"
+                        onClick={() => handleCreateTweet()}>
+                        Share
+                    </Button>  
                 </div>                              
             </div>            
         </Dialog>
     )
 }
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    createTweetAction: createTweet,
+}, dispatch);
+
+const withRedux = connect(null, mapDispatchToProps);
+
+export default compose(withRedux(AddTweetDialog));

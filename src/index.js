@@ -23,7 +23,7 @@ ReactDOM.render(
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/public" element={<Public />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:profileUsername" element={<Profile />} />
       </Routes>
     </Provider>
   </BrowserRouter>,

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -6,8 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from "@material-ui/core/styles";
 
-import { getUserTweets } from '../../Redux/actions';
-import { userTweetsSelector } from "../../Redux/selectors";
+import { getUserTweets, followUser, unfollowUser, isUserFollowing } from '../../Redux/actions';
+import { userTweetsSelector, isUserFollowingSelector } from "../../Redux/selectors";
 
 import TwitTile from "../../components/TwitTile/TwitTile";
 import AddTweetDialog from "../../components/AddTweetDialog/AddTweetDialog";
@@ -26,24 +27,60 @@ const useStyles = makeStyles(() => ({
 }));
 
 function Profile(props) {
+    const classes = useStyles();
+    const navigate = useNavigate();
+    const loggedInUser = localStorage.getItem("user");
+    const { profileUsername } = useParams();
+
     const {
-        // getUserAction,
         getUserTweetsAction,
         userTweets,
+        followUserAction,
+        unfollowUserAction,
+        isUserFollowingAction,
+        isUserFollowing,
     } = props;
 
     const [addTweetDialog, setAddTweetDialogOpen] = useState(false);
+    const [follows, setFollows] = useState(false);
 
     useEffect(() => {
-        let userId = 1;
-        getUserTweetsAction(userId);  
-      }, [])
+        isUserFollowingAction(loggedInUser, profileUsername);
+    }, []);
 
-    const classes = useStyles();
+    useEffect(() => {
+        setFollows(isUserFollowing);
+    }, [isUserFollowing])
+
+    useEffect(() => {        
+        if (profileUsername !== undefined) {
+            getUserTweetsAction(profileUsername); 
+        }
+        
+    }, [profileUsername]);
+
+    let actionButton;
+    if (loggedInUser === profileUsername) {
+        actionButton = <Button 
+                            variant="contained" 
+                            className={classes.primaryButton}
+                            onClick={() => setAddTweetDialogOpen(true)}>
+                                Add tweet
+                        </Button>
+    } else {
+        actionButton = <Button
+                            variant="contained" 
+                            className={classes.primaryButton}
+                            onClick={() => follows === true ? unfollowUserAction(loggedInUser, profileUsername) : followUserAction(loggedInUser, profileUsername)}>
+                                {follows === true ? "Unfollow" : "Follow"}
+                        </Button>
+    };
+
+
 
     return (
         <div className="app">
-            <div className="header">
+            <div className="header" onClick={() => navigate("/public")}>
                 <p>Mini Twit ITU</p>
             </div>
             <div className="body">
@@ -53,25 +90,23 @@ function Profile(props) {
                         <div className="feedDiv">
                             <div className="innerFeedDiv">
                                 <div className="feedTitle">MY FEED</div>
-                                <Button 
-                                    variant="contained" 
-                                    className={classes.primaryButton}
-                                    onClick={() => setAddTweetDialogOpen(true)}>
-                                        Add tweet
-                                </Button>
+                                {actionButton}
                                 <AddTweetDialog
                                     open={addTweetDialog}
                                     setAddTweetDialogOpen={setAddTweetDialogOpen}
+                                    username={loggedInUser? loggedInUser : "No username!"}
                                 />
                             </div>
                             <hr className="line"/>
                             <div className="tweetsDiv">
-                                {userTweets?.data?.twits?.map((tweet) => (                                
+                                {userTweets?.data?.map((tweet) =>                               
                                     <TwitTile  
                                         id={tweet.id}
-                                        date={tweet.date}
-                                        text={tweet.text} />
-                                ))}
+                                        username={tweet.username}
+                                        date={tweet.insertionDate}
+                                        tweet={tweet.tweet}
+                                        flagged={tweet.flagged} />
+                                )}
                             </div>
                         </div>
                     </Grid>
@@ -87,12 +122,16 @@ function Profile(props) {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     getUserTweetsAction: getUserTweets,
-  }, dispatch);
-  
-  const mapStateToProps = (state) => ({
+    followUserAction: followUser,
+    unfollowUserAction: unfollowUser,
+    isUserFollowingAction: isUserFollowing,
+}, dispatch);
+
+const mapStateToProps = (state) => ({
     userTweets: userTweetsSelector(state) ? userTweetsSelector(state) : '',
-  });
-  
-  const withRedux = connect(mapStateToProps, mapDispatchToProps);
-  
-  export default compose(withRedux(Profile));
+    isUserFollowing: isUserFollowingSelector(state) ? isUserFollowingSelector(state): '',
+});
+
+const withRedux = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(withRedux(Profile));

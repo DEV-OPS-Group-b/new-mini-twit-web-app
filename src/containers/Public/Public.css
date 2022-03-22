@@ -19,7 +19,7 @@
 }
 
 /* .body {
-    height: 90%;
+    overflow-y: scroll;
 } */
 
 .footer {
@@ -43,15 +43,27 @@
 }
 
 .gridBody {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.8);     
 }
 
 .feedDiv {
-    margin: 20px;
+    margin: 20px;    
+}
+
+::-webkit-scrollbar {
+    width: 10px;
 }
 
 .tweetsDiv {
     margin-top: 50px;
+    overflow-y: scroll;  
+    height: 80vh; 
+}
+
+.link {
+    text-decoration: none;
+    font-weight: normal;
+    color: black;
 }
 
 .line {

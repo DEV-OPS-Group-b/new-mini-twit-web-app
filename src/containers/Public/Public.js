@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import {
+    Link
+  } from "react-router-dom";
 
 import Grid from "@material-ui/core/Grid";
 
@@ -14,7 +17,7 @@ function Public(props) {
 
     const {
         getAllTweetsAction,
-        userTweets,
+        allTweets,
     } = props;
 
     useEffect(() => {
@@ -34,13 +37,16 @@ function Public(props) {
                             FEED
                             <hr className="line"/>
                             <div className="tweetsDiv">
-                                {userTweets?.data?.allTweets?.map((tweet) => (                                
-                                    <TwitTile  
-                                        id={tweet.id}
-                                        avatar={tweet.userAvatar}
-                                        username={tweet.username}
-                                        date={tweet.date}
-                                        text={tweet.text} />
+                                {allTweets?.data?.map((tweet) => ( 
+                                    <Link to={`/profile/${tweet.username}`} className="link">
+                                        <TwitTile  
+                                            id={tweet.id}
+                                            username={tweet.username}
+                                            date={tweet.insertionDate}
+                                            tweet={tweet.tweet}
+                                            flagged={tweet.flagged} />
+                                    </Link>                               
+                                    
                                 ))}
                             </div>
                         </div>
@@ -60,7 +66,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 }, dispatch);
 
 const mapStateToProps = (state) => ({
-    userTweets: allTweetsSelector(state) ? allTweetsSelector(state) : '',
+    allTweets: allTweetsSelector(state) ? allTweetsSelector(state) : '',
 });
 
 const withRedux = connect(mapStateToProps, mapDispatchToProps);

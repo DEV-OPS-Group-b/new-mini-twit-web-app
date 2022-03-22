@@ -8,6 +8,7 @@
     text-align: center;
     position: relative;
     color: whitesmoke;
+    cursor: pointer;
 }
 
 .header p {
@@ -52,6 +53,8 @@
 
 .tweetsDiv {
     margin-top: 50px;
+    height: 80vh;
+    overflow-y: scroll;  
 }
 
 .feedTitle {

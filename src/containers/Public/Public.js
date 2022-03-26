@@ -22,7 +22,7 @@ function Public(props) {
 
     useEffect(() => {
         getAllTweetsAction();
-    }, [])
+    }, [getAllTweetsAction])
 
     return (
         <div className="app">

@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
         marginLeft: "10px",
     },
     cancelButton: {
-        background: "##F5F5F5",
+        background: "#F5F5F5",
         "&:hover": {
         background: "rgba(245,245,245, 0.5)",
         },

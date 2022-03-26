@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from "@material-ui/core/styles";
 
 import { getUserTweets, followUser, unfollowUser, isUserFollowing } from '../../Redux/actions';
-import { userTweetsSelector, isUserFollowingSelector } from "../../Redux/selectors";
+import { userTweetsSelector, isUserFollowingSelector, requestResponseSelector } from "../../Redux/selectors";
 
 import TwitTile from "../../components/TwitTile/TwitTile";
 import AddTweetDialog from "../../components/AddTweetDialog/AddTweetDialog";
@@ -19,6 +19,15 @@ const useStyles = makeStyles(() => ({
         background: "#439cb8",
         "&:hover": {
         background: "rgba(67,156,184, 0.5)",
+        },
+        color: "white",
+        borderRadius: "45px",
+        width: "150px",
+    },
+    unfollowButton: {
+        background: "#A10A1E",
+        "&:hover": {
+        background: "rgba(161, 10, 30, 0.5)",
         },
         color: "white",
         borderRadius: "45px",
@@ -39,6 +48,7 @@ function Profile(props) {
         unfollowUserAction,
         isUserFollowingAction,
         isUserFollowing,
+        requestResponse,
     } = props;
 
     const [addTweetDialog, setAddTweetDialogOpen] = useState(false);
@@ -46,7 +56,7 @@ function Profile(props) {
 
     useEffect(() => {
         isUserFollowingAction(loggedInUser, profileUsername);
-    }, [isUserFollowingAction, loggedInUser, profileUsername]);
+    }, [isUserFollowingAction, loggedInUser, profileUsername, requestResponse]);
 
     useEffect(() => {
         setFollows(isUserFollowing);
@@ -59,6 +69,13 @@ function Profile(props) {
         
     }, [profileUsername, getUserTweetsAction]);
 
+    useEffect(() => {
+        if (requestResponse === true)
+        {
+            getUserTweetsAction(profileUsername);
+        }        
+    }, [requestResponse, getUserTweetsAction, profileUsername])
+
     let actionButton;
     if (loggedInUser === profileUsername) {
         actionButton = <Button 
@@ -70,7 +87,7 @@ function Profile(props) {
     } else {
         actionButton = <Button
                             variant="contained" 
-                            className={classes.primaryButton}
+                            className={follows === true ? classes.unfollowButton : classes.primaryButton}
                             onClick={() => follows === true ? unfollowUserAction(loggedInUser, profileUsername) : followUserAction(loggedInUser, profileUsername)}>
                                 {follows === true ? "Unfollow" : "Follow"}
                         </Button>
@@ -130,6 +147,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 const mapStateToProps = (state) => ({
     userTweets: userTweetsSelector(state) ? userTweetsSelector(state) : '',
     isUserFollowing: isUserFollowingSelector(state) ? isUserFollowingSelector(state): '',
+    requestResponse: requestResponseSelector(state) ? requestResponseSelector(state) : '',
 });
 
 const withRedux = connect(mapStateToProps, mapDispatchToProps);

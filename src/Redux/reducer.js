@@ -60,22 +60,18 @@ export default (state = initialState, action) => {
             const { type } = action;
             return { ...state, type };
 
-        case GET_USER:
-            case SET_USER:
-                const { user } = action;
-                return { ...state, user };
+        case SET_USER:
+            const { user } = action;
+            return { ...state, user };
 
-
-        case GET_IS_USER_FOLLOWING:
         case SET_IS_USER_FOLLOWING:
             const { isFollowing } = action;
             return { ...state, isFollowing };
             
-        case GET_ALL_TWEETS:
         case SET_ALL_TWEETS:
             const { allTweets } = action;
             return { ...state, allTweets };
-        case GET_USER_TWEETS:
+
         case SET_USER_TWEETS:
             const { userTweets } = action;
             return { ...state, userTweets };

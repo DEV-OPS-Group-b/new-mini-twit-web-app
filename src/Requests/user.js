@@ -3,6 +3,7 @@ import axios from "axios";
 export function requestGetUser(userId) {
     return axios.request({
       method: "get",
+      // url: `http://localhost:8080/devops/user/getUser/${userId}`,
       url: `${process.env.REACT_APP_API_URL}/devops/user/getUser/${userId}`,
       headers: {
         Accept: "application/json",

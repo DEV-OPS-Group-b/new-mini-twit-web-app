@@ -37,10 +37,7 @@ const initialState = {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action) => {
     switch (action.type) {
-        case GET_USER:
-        case SET_USER:
-            const { user } = action;
-            return { ...state, user };
+        
         case CREATE_USER:
         case CREATE_USER_SUCCESS:
         case CREATE_USER_ERROR:
@@ -62,6 +59,11 @@ export default (state = initialState, action) => {
         case RESET_TYPE:
             const { type } = action;
             return { ...state, type };
+
+        case GET_USER:
+            case SET_USER:
+                const { user } = action;
+                return { ...state, user };
 
 
         case GET_IS_USER_FOLLOWING:

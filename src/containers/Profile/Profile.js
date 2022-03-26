@@ -46,7 +46,7 @@ function Profile(props) {
 
     useEffect(() => {
         isUserFollowingAction(loggedInUser, profileUsername);
-    }, []);
+    }, [isUserFollowingAction, loggedInUser, profileUsername]);
 
     useEffect(() => {
         setFollows(isUserFollowing);
@@ -57,7 +57,7 @@ function Profile(props) {
             getUserTweetsAction(profileUsername); 
         }
         
-    }, [profileUsername]);
+    }, [profileUsername, getUserTweetsAction]);
 
     let actionButton;
     if (loggedInUser === profileUsername) {

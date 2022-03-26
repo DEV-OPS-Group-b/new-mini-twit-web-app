@@ -41,7 +41,7 @@ function SignUpForm(props) {
     else if (requestResponse === false) {
       setResponseMessage("The username is already taken!")
     }
-  }, [requestResponse]);  
+  }, [requestResponse, navigate, resetTypeValueAction]);  
 
   // Set state for Redux
   const [username, setUserName] = useState();
@@ -75,7 +75,7 @@ function SignUpForm(props) {
   };
 
   const validateEmail = (email) => {
-    const validEmail = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
+    const validEmail = /[a-zA-Z0-9]+[.]?([a-zA-Z0-9]+)?[@][a-z]{3,9}[.][a-z]{2,5}/g;
     const isValid = validEmail.test(email);
     if (!isValid) {
       setEmailErrorMsg("Not a valid email");

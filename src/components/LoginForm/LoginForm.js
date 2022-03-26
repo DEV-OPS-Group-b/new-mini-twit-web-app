@@ -45,7 +45,7 @@ function LoginForm(props) {
     } else if (requestResponse === false) {
       setResponseMsg("Invalid credentials!");
     }
-  }, [requestResponse]);  
+  }, [requestResponse, login, navigate, resetTypeValueAction]);  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

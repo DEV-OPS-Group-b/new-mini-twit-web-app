@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -32,7 +33,7 @@ const useStyles = makeStyles(() => ({
 
 function TwitTile(props) {
 
-    const { id, username, avatar, date, tweet, flagged, updateTweetFlagAction } = props;
+    const { key, username, avatar, date, tweet, flagged, updateTweetFlagAction } = props;
     const classes = useStyles();
     const loggedInUser = localStorage.getItem("user");
 
@@ -40,12 +41,12 @@ function TwitTile(props) {
     if (flagged === false) {
         flagType = <Button 
                         className={classes.setFlagButton}
-                        onClick={() => updateTweetFlagAction(id, loggedInUser, "admin")}>
+                        onClick={() => updateTweetFlagAction(key, loggedInUser, "admin")}>
                         Flag</Button> 
     } else {
         flagType = <Button 
                         className={classes.removeFlagButton}
-                        onClick={() => updateTweetFlagAction(id, loggedInUser, "admin")}>
+                        onClick={() => updateTweetFlagAction(key, loggedInUser, "admin")}>
                         Remove Flag</Button>;
     }
 
@@ -72,6 +73,16 @@ function TwitTile(props) {
         </div>
     )
 }
+
+TwitTile.propTypes = {
+    key: PropTypes.string,
+    username: PropTypes.string,
+    avatar: PropTypes.string,
+    date: PropTypes.string,
+    tweet: PropTypes.string,
+    flagged: PropTypes.bool,
+    updateTweetFlagAction: PropTypes.func,
+};
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     updateTweetFlagAction: updateTweetFlag,

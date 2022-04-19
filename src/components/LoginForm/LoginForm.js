@@ -5,6 +5,7 @@ import {
     Link,
     useNavigate 
   } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 import { loginUser, resetTypeValue } from "../../Redux/actions";
 import { requestResponseSelector } from "../../Redux/selectors";
@@ -57,7 +58,7 @@ function LoginForm(props) {
         <form onSubmit={handleSubmit}>
           <div className="titleText">Login</div>
           <div className="descriptionText">
-            <div>Don't have an account?</div>
+            <div>{"Don't have an account?"}</div>
             <div>
               <Link to="/sign-up" className="link">Sign Up</Link>
             </div>
@@ -93,6 +94,12 @@ function LoginForm(props) {
       </div>
   );
 }
+
+LoginForm.propTypes = {
+  loginUserAction: PropTypes.func,
+  requestResponse: PropTypes.bool,
+  resetTypeValueAction: PropTypes.func,
+};
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   loginUserAction: loginUser,

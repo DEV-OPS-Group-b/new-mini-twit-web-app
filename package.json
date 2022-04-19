@@ -29,7 +29,8 @@
     "build": "react-scripts build",
     "flow": "flow",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/**/*.js src/**/*.jsx"
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.5.4",
     "flow-bin": "^0.174.1"
   }
 }

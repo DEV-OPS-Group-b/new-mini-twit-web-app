@@ -181,7 +181,7 @@ function SignUpForm(props) {
 }
 
 SignUpForm.propTypes = {
-  createUserAction: PropTypes.fun,
+  createUserAction: PropTypes.func,
   requestResponse: PropTypes.bool,
   resetTypeValueAction: PropTypes.func,
 };

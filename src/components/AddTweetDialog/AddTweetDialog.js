@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Dialog from '@material-ui/core/Dialog';
 import TextField from '@mui/material/TextField';
@@ -90,6 +91,13 @@ function AddTweetDialog(props) {
         </Dialog>
     )
 }
+
+AddTweetDialog.propTypes = {
+    setAddTweetDialogOpen: PropTypes.func,
+    createTweetAction: PropTypes.func,
+    open: PropTypes.bool,
+    username: PropTypes.string,
+};
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     createTweetAction: createTweet,

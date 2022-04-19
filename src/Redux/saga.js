@@ -60,7 +60,7 @@ export function* handleGetUser(userId) {
     const { data } = response;
     yield put(setUser(data));
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 
@@ -107,7 +107,7 @@ export function* handleIsUserFollowing({currentUsername, targetUsername}) {
     const { data } = response;  
     yield put(setIsUserFollowing(data));    
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 
@@ -120,7 +120,7 @@ export function* handleGetAllTweets() {
     const response = yield call(requestGetAllTweets);
       yield put(setAllTweets(response));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
 }
 
@@ -129,7 +129,7 @@ export function* handleGetUserTweets({ profileUsername }) {
       const response = yield call(requestGetUserTweets, profileUsername);
       yield put(setUserTweets(response));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
 }
 

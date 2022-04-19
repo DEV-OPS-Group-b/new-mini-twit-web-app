@@ -5,6 +5,7 @@ import {
   Link,
   useNavigate 
 } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 import { createUser, resetTypeValue } from "../../Redux/actions";
 import { requestResponseSelector } from "../../Redux/selectors";
@@ -178,6 +179,12 @@ function SignUpForm(props) {
       </div>
   );
 }
+
+SignUpForm.propTypes = {
+  createUserAction: PropTypes.fun,
+  requestResponse: PropTypes.bool,
+  resetTypeValueAction: PropTypes.func,
+};
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   createUserAction: createUser,

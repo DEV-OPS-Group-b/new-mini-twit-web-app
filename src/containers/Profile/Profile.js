@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
@@ -91,7 +92,7 @@ function Profile(props) {
                             onClick={() => follows === true ? unfollowUserAction(loggedInUser, profileUsername) : followUserAction(loggedInUser, profileUsername)}>
                                 {follows === true ? "Unfollow" : "Follow"}
                         </Button>
-    };
+    }
 
 
 
@@ -118,7 +119,7 @@ function Profile(props) {
                             <div className="tweetsDiv">
                                 {userTweets?.data?.map((tweet) =>                               
                                     <TwitTile  
-                                        id={tweet.id}
+                                        key={tweet.id}
                                         username={tweet.username}
                                         date={tweet.insertionDate}
                                         tweet={tweet.tweet}
@@ -136,6 +137,16 @@ function Profile(props) {
         </div>
     );
 }
+
+Profile.propTypes = {
+    getUserTweetsAction: PropTypes.func,
+    userTweets: PropTypes.array,
+    followUserAction: PropTypes.func,
+    unfollowUserAction: PropTypes.func,
+    isUserFollowingAction: PropTypes.func,
+    isUserFollowing: PropTypes.bool,
+    requestResponse: PropTypes.bool,
+};
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     getUserTweetsAction: getUserTweets,

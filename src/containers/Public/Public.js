@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {
     Link
   } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 import Grid from "@material-ui/core/Grid";
 
@@ -38,9 +39,9 @@ function Public(props) {
                             <hr className="line"/>
                             <div className="tweetsDiv">
                                 {allTweets?.data?.map((tweet) => ( 
-                                    <Link to={`/profile/${tweet.username}`} className="link">
+                                    <Link key={tweet.id} to={`/profile/${tweet.username}`} className="link">
                                         <TwitTile  
-                                            id={tweet.id}
+                                            key={tweet.id}
                                             username={tweet.username}
                                             date={tweet.insertionDate}
                                             tweet={tweet.tweet}
@@ -60,6 +61,11 @@ function Public(props) {
         </div>
     );
 }
+
+Public.propTypes = {
+    allTweets: PropTypes.array,
+    getAllTweetsAction: PropTypes.func,
+};
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     getAllTweetsAction: getAllTweets,

@@ -30,7 +30,7 @@ const initialState = {
     user: undefined,
 };
 
-// eslint-disable-next-line import/no-anonymous-default-export
+//// eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action) => {
     switch (action.type) {
         
@@ -52,25 +52,31 @@ export default (state = initialState, action) => {
         case UPDATE_TWEET_FLAG:
         case UPDATE_TWEET_FLAG_SUCCESS:
         case UPDATE_TWEET_FLAG_ERROR:
-        case RESET_TYPE:
+        case RESET_TYPE: {
             const { type } = action;
             return { ...state, type };
+        }
 
-        case SET_USER:
+        case SET_USER: {
             const { user } = action;
             return { ...state, user };
+        }
 
-        case SET_IS_USER_FOLLOWING:
+        case SET_IS_USER_FOLLOWING: {
             const { isFollowing } = action;
             return { ...state, isFollowing };
+        }
             
-        case SET_ALL_TWEETS:
+        case SET_ALL_TWEETS: {
             const { allTweets } = action;
             return { ...state, allTweets };
+        }
 
-        case SET_USER_TWEETS:
+        case SET_USER_TWEETS: {
             const { userTweets } = action;
             return { ...state, userTweets };
+        }
+
         default:
             return state;
     }

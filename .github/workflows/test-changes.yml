@@ -1,1 +1,38 @@
+name: Test
 
+on:
+  push:
+    branches: [ Develop ]
+
+
+jobs:
+  # 1st Job
+  Build-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2        
+      # install applicaion dependencies
+      - name: Install dependencies
+        run: |
+          npm install          
+      # build the app
+      - name: build
+        run: |
+          npm run build
+  # 2nd Job
+  Test-code-quality:
+     runs-on: ubuntu-latest
+     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2        
+      # install applicaion dependencies
+      - name: Install dependencies
+        run: |
+          npm install          
+      # build the app
+      - name: build
+        run: |
+          npm run build
+      - name: "🔍 lint code"
+        run: npm run lint --if-present

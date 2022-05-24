@@ -32,6 +32,7 @@ jobs:
           
   # 2nd Job    
   Push-new-image-to-Docker:
+    needs: Build-project
     runs-on: ubuntu-latest
     steps:
       # Login against a Docker registry
